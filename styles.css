@@ -612,7 +612,8 @@ h2 {
     z-index: 2000;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
+    padding: 20px;
     backdrop-filter: blur(5px);
 }
 
