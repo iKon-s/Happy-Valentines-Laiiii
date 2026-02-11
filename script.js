@@ -252,6 +252,9 @@ function setupMusicPlayer() {
 function openLetter() {
     $("#letterOverlay").removeClass("hidden");
     $("#envelope").addClass("open").removeClass("close");
+
+    // FORCED RESET: This ensures it starts at the top of the letter
+    document.querySelector('.letter-paper').scrollTop = 0;
 }
 
 function closeLetter() {
@@ -269,11 +272,17 @@ function closeLetter() {
 function showPoem() {
     document.getElementById('letterContent').classList.add('hidden');
     document.getElementById('poemContent').classList.remove('hidden');
+
+    // FORCED RESET: This ensures the poem starts at the top
+    document.querySelector('.letter-paper').scrollTop = 0;
 }
 
 function backToLetter() {
     document.getElementById('poemContent').classList.add('hidden');
     document.getElementById('letterContent').classList.remove('hidden');
+
+    // FORCED RESET: In case she scrolled down the poem
+    document.querySelector('.letter-paper').scrollTop = 0;
 }
 
 // Update your celebrate function to attach the trigger
