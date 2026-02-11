@@ -563,6 +563,17 @@ h2 {
   }
 }
 
+@keyframes fadeInContent{
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 .envlope-wrapper {
   height: 380px;
@@ -612,9 +623,14 @@ h2 {
     z-index: 2000;
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
-    padding: 20px;
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 40px 20px;
     backdrop-filter: blur(5px);
+}
+
+.content-view{
+    animation: fadeInContent 0.8s ease-in-out forwards;
 }
 
 .letter-paper {
