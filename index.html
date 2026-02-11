@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CUSTOMIZE: Browser tab title -->
+    <title>Will You Be My Valentine? 💝</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <!-- Hearts and bears will be added here by JavaScript -->
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <h1 id="valentineTitle"></h1>
+        
+        <!-- Music Player -->
+        <div id="musicControls" class="music-controls">
+            <button id="musicToggle" class="music-btn">🎵 Play Music</button>
+            <audio id="bgMusic" loop>
+                <source id="musicSource" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- First Question -->
+        <div class="question-section" id="question1">
+            <h2 id="question1Text"></h2>
+            <button class="cute-btn" onclick="moveButton(this)" id="yesBtn1"></button>
+            <button class="cute-btn" onclick="moveButton(this)" id="noBtn1"></button>
+            <!-- CUSTOMIZE: Secret answer text -->
+            <div class="secret-answer">
+                <button class="cute-btn special" onclick="showNextQuestion(2)" id="secretAnswerBtn"></button>
+            </div>
+        </div>
+
+        <!-- Second Question (Love Meter) -->
+        <div class="question-section hidden" id="question2">
+            <h2 id="question2Text"></h2>
+            <!-- Love meter settings: min="0" max="10000" -->
+            <div class="love-meter">
+                <input type="range" min="0" max="10000" value="100" class="slider" id="loveMeter">
+                <p>
+                    <span class="love-value-container"><span id="startText"></span> (<span id="loveValue">100</span>%)</span>
+                    <span id="extraLove" class="hidden"></span>
+                </p>
+            </div>
+            <button class="cute-btn" onclick="showNextQuestion(3)" id="nextBtn"></button>
+        </div>
+
+        <!-- Final Question -->
+        <div class="question-section hidden" id="question3">
+            <h2 id="question3Text"></h2>
+            <button class="cute-btn final-yes" onclick="celebrate()" id="yesBtn3"></button>
+            <button class="cute-btn" onclick="moveButton(this)" id="noBtn3"></button>
+        </div>
+
+        <!-- CUSTOMIZE: Celebration message -->
+        <div class="celebration hidden" id="celebration">
+            <h2 id="celebrationTitle" class="celebration-text"></h2>
+            <p class="celebration-text" id="celebrationMessage" style="font-size: 1.1rem;"></p>
+            <p class="celebration-text" id="celebrationEmojis" style="font-size: 0.8rem; font-style: italic; opacity: 0.9;"></p>
+            
+            <div class="envlope-wrapper">
+                <div id="envelope" class="close">
+                    <div class="front flap"></div>
+                    <div class="front pocket"></div>
+                    <div class="letter">
+                        <div class="words line1">Dear Lai</div>
+                    </div>
+                    <div class="hearts">
+                        <div class="heart a1"></div>
+                        <div class="heart a2"></div>
+                        <div class="heart a3"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="celebration-text" style="font-size: 0.9rem; opacity: 0.8;">(Tap the envelope to read hehe)</p>
+        </div>
+
+        <div id="letterOverlay" class="letter-overlay hidden">
+            <div class="letter-paper">
+                <div id="letterContent" class="content-view">
+                    <h3 class="letter-to">To my dearest Laii:</h3>
+                    <div class="letter-text">
+                        <p>Happy Valentine’s LaiLoveeee! Siguro that will be your special nickname for me na hehe. I want you to know that I appreciate you every single day since we started talking and that you’re easily the best plot twist that has ever happened, not only for this year but in my entire life.</p>
+                        <p>You came at such an unexpected timing but it never felt like it was wrong, on the contrary it felt so right that I found myself being at peace with a stranger I met on the internet. But you’re not just any stranger, as I always say and I mean it, to me you are like the person holding the other end of my red string of fate. It felt as though you have been what my soul has been yearning for all this time.</p>
+                        <p>As the days went by, I found myself liking this girl I apparently share a lot of similarities with, and I kept finding myself diving deeper. I don’t just like you, I like you soo sooo muchh, to the point na sometimes you make me want to say a certain phrase, pero kalma self, that’s something we don’t take lightly hehe. You make me feel seen in ways I have never felt before.</p>
+                        <p>But there’s no rush. I am enjoying this process we are currently in. Everytime I learn something about you, I just keep finding myself being pulled closer to you and I love every single moment of it. I want to learn all of you and I want to learn how you want to be loved. Yes, I can see you in my future. I am here for the long run, and I want to be the one who will give the love that you so deeply deserve.</p>
+                        <p>With that said, I’d like this letter to serve as the announcement of my intention to pursue you. Though we won’t be able to see each other everyday, gusto kitang ligawan sa bawat sandaling magsasama tayo sa tuwing magkikita tayo. You deserve all the best in the world and I will make sure that I will be the man who can and will be with you throughout this journey we call life <3.</p>
+                        <p>I also made you a poem, hope you'll like it!</p>
+                    </div>
+                    <div class="letter-buttons">
+                        <button class="cute-btn primary" onclick="showPoem()">Tula for Lai ❤️</button>
+                    </div>
+                </div>
+
+                <div id="poemContent" class="content-view hidden">
+                    <h3 class="letter-to">Destiny's Strangers</h3>
+                    <div class="letter-text poem">
+                        <p>Drifting along the sea of life,<br>
+                        Minding my own business seeing if I can thrive,<br>
+                        Then came along a person much like me,<br>
+                        Didn’t expect I’d be thinking what we could be.</p>
+                        
+                        <p>You came when I wasn’t looking,<br>
+                        But when you did I found myself admiring,<br>
+                        The sun and moon rose and fell,<br>
+                        Emotions I felt towards you, I wanted to tell.</p>
+
+                        <p>In the glow of a screen our story began,<br>
+                        A digital bridge, a beautiful plan,<br>
+                        Now I wake with a peace I've never known,<br>
+                        Counting the days until the seeds we've sown.</p>
+
+                        <p>Bloom into moments,<br>
+                        No longer apart,<br>
+                        From typed-out words,<br>
+                        To the beat of your heart.</p>
+
+                        <p>The world is a rush, a chaotic blur,<br>
+                        A hazy background of all that occurred,<br>
+                        But you are the vision, steady and true,<br>
+                        The only horizon I’m walking into.</p>
+
+                        <p>I’m holding on tight,<br>
+                        I’m staying the course,<br>
+                        Drawn to your soul,<br>
+                        By a natural force.</p>
+
+                        <p>I’ll take every risk, I’ll brave every sea,<br>
+                        Because you are the path intended for me,<br>
+                        No one compares, no shadow can try,<br>
+                        You are the destiny I couldn’t deny.</p>
+
+                        <p>With you by my side the journey is clear,<br>
+                        My favourite plot twist, finally here.</p>
+                    </div>
+                    <div class="letter-buttons">
+                        <button class="cute-btn" onclick="backToLetter()">Love Letter</button>
+                        <button class="cute-btn" onclick="closeLetter()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
