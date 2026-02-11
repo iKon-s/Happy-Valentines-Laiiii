@@ -250,10 +250,12 @@ function setupMusicPlayer() {
 
 // Function to show the full screen letter
 function openLetter() {
-    $("#letterOverlay").removeClass("hidden");
+    const overlay = document.getElementById('letterOverlay');
+    overlay.classList.remove('hidden');
     $("#envelope").addClass("open").removeClass("close");
-
-    // FORCED RESET: This ensures it starts at the top of the letter
+    
+    // Forced scroll to top of the paper AND the overlay
+    document.getElementById('letterOverlay').scrollTop = 0;
     document.querySelector('.letter-paper').scrollTop = 0;
 }
 
@@ -272,8 +274,9 @@ function closeLetter() {
 function showPoem() {
     document.getElementById('letterContent').classList.add('hidden');
     document.getElementById('poemContent').classList.remove('hidden');
-
-    // FORCED RESET: This ensures the poem starts at the top
+    
+    // Reset scroll for the new content
+    document.getElementById('letterOverlay').scrollTop = 0;
     document.querySelector('.letter-paper').scrollTop = 0;
 }
 
